@@ -2,8 +2,7 @@ const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
 const app = express();
-const PORT = process.env.PORT || 5000;
-const API_KEY = '7bcd2df5c5cc4abd88492558240405';
+const { PORT, API_KEY } = require('./src/config/serverConfig');
 
 app.use(express.json());
 app.use(cors());
@@ -24,6 +23,7 @@ app.get('/weather/:city', async (req, res) => {
 
         res.json(weatherData);
     } catch (error) {
+        console.log(error)
         res.status(500).json({ error: 'Failed to fetch weather data' });
     }
 });
